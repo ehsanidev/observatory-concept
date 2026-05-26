@@ -1,0 +1,211 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* لایه 1: body با GIF */
+body {
+    min-height: 100vh;
+    position: relative;
+    background-image: url('/images/background.gif'); /* مسیر گیف خود را وارد کنید */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* لایه 2: گرادیانت محو روی گیف */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(12, 0, 54, 0.8) 0%,
+        rgba(17, 4, 51, 0.5) 30%,
+        rgba(102, 15, 202, 0.2) 60%,
+        rgba(140, 103, 240, 0.7) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* لایه 3: کانتینر اصلی با تصویر پس‌زمینه */
+.main-container {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('/images/main1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* لایه محتوا برای قرار گرفتن روی تصویر */
+.content {
+    position: relative;
+    z-index: 3;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* انیمیشن نور سایه قرمز از کم به زیاد */
+@keyframes breathingGlow {
+    0% {
+        box-shadow: 0 0 1px rgba(255, 0, 0, 0.2),
+                    0 0 3px rgba(255, 0, 0, 0.1),
+                    0 0 5px rgba(255, 0, 0, 0.05);
+    }
+    25% {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5),
+                    0 0 10px rgba(255, 0, 0, 0.4),
+                    0 0 15px rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(255, 0, 0, 1),
+                    0 0 22px rgba(255, 0, 0, 0.8),
+                    0 0 35px rgba(255, 0, 0, 0.6),
+                    0 0 50px rgba(255, 0, 0, 0.4),
+                    0 0 70px rgba(255, 0, 0, 0.2);
+    }
+    75% {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5),
+                    0 0 10px rgba(255, 0, 0, 0.4),
+                    0 0 15px rgba(255, 0, 0, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 1px rgba(255, 0, 0, 0.2),
+                    0 0 3px rgba(255, 0, 0, 0.1),
+                    0 0 5px rgba(255, 0, 0, 0.05);
+    }
+}
+
+/* استایل نقاط قرمز با انیمیشن */
+.red-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #e76e6e, #cc0000);
+    border-radius: 50%;
+    cursor: pointer;
+    animation: breathingGlow 0.5s ease-in-out infinite;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+.red-dot:hover {
+    animation: none;
+    transform: scale(2.2);
+    background: radial-gradient(circle, #e76e6e, #ff0000);
+    box-shadow: 0 0 20px #ff0000,
+                0 0 40px #ff0000,
+                0 0 60px #ff0000,
+                0 0 80px rgba(255, 0, 0, 0.6);
+}
+
+/* مودال */
+.modal {
+    display: none;
+    position: fixed;
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    min-width: 250px;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.modal p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.modal button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal button:hover {
+    background-color: #cc0000;
+}
+
+/* خطوط چین دار بین نقطه و مودال */
+.dotted-line {
+    position: fixed;
+    border: 1px dashed red;
+    pointer-events: none;
+    z-index: 999;
+    transform-origin: top left;
+}
+
+/* استایل بستن مودال با کلیک خارج */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 998;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* استایل برای نمایش بهتر در موبایل */
+@media (max-width: 768px) {
+    .modal {
+        min-width: 200px;
+        max-width: 300px;
+        padding: 15px;
+    }
+    
+    .modal h3 {
+        font-size: 1rem;
+    }
+    
+    .modal p {
+        font-size: 0.8rem;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .main-container {
+        margin: 10px;
+    }
+}
