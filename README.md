@@ -1,4 +1,3 @@
-```markdown
 # پروژه نقاط تعاملی با انیمیشن و مودال / Interactive Dot Points Project with Animation & Modal
 
 [فارسی](#فارسی) | [English](#english)
@@ -42,8 +41,6 @@ project/
 ## 🚀 نحوه استفاده
 
 ### 1. جایگزینی تصاویر
-
-فایل‌های زیر را با تصاویر دلخواه خود جایگزین کنید:
 
 ```css
 /* در styles.css */
@@ -320,6 +317,5 @@ This project is free and open-source.
 برای سوالات و پیشنهادات، با ما در ارتباط باشید / For questions and suggestions, feel free to reach out.
 
 ---
-
-**نسخه / Version:** 1.0.0  
+  
 **آخرین بروزرسانی / Last Updated:** 2026
